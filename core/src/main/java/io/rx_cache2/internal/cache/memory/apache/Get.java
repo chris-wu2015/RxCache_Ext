@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The "read" subset of the {@link java.util.Map} interface.
+ * The "read" subset of the {@link Map} interface.
  *
  * @since 4.0
  * @version $Id: Get.java 1543265 2013-11-19 00:48:44Z ggregory $
@@ -32,47 +32,47 @@ import java.util.Set;
 public interface Get<K, V> {
 
     /**
-     * @see java.util.Map#containsKey(Object)
+     * @see Map#containsKey(Object)
      */
     boolean containsKey(Object key);
 
     /**
-     * @see java.util.Map#containsValue(Object)
+     * @see Map#containsValue(Object)
      */
     boolean containsValue(Object value);
 
     /**
-     * @see java.util.Map#entrySet()
+     * @see Map#entrySet()
      */
     Set<Map.Entry<K, V>> entrySet();
 
     /**
-     * @see java.util.Map#get(Object)
+     * @see Map#get(Object)
      */
     V get(Object key);
 
     /**
-     * @see java.util.Map#remove(Object)
+     * @see Map#remove(Object)
      */
     V remove(Object key);
 
     /**
-     * @see java.util.Map#isEmpty()
+     * @see Map#isEmpty()
      */
     boolean isEmpty();
 
     /**
-     * @see java.util.Map#keySet()
+     * @see Map#keySet()
      */
     Set<K> keySet();
 
     /**
-     * @see java.util.Map#size()
+     * @see Map#size()
      */
     int size();
 
     /**
-     * @see java.util.Map#values()
+     * @see Map#values()
      */
     Collection<V> values();
 

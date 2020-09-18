@@ -28,14 +28,14 @@ public final class TwoLayersCache {
   private final SaveRecord saveRecord;
 
   @Inject public TwoLayersCache(EvictRecord evictRecord, io.rx_cache2.internal.cache.RetrieveRecord retrieveRecord,
-      SaveRecord saveRecord) {
+                                SaveRecord saveRecord) {
     this.evictRecord = evictRecord;
     this.retrieveRecord = retrieveRecord;
     this.saveRecord = saveRecord;
   }
 
   public <T> Record<T> retrieve(String providerKey, String dynamicKey, String dynamicKeyGroup,
-      boolean useExpiredDataIfLoaderNotAvailable, Long lifeTime, boolean isEncrypted) {
+                                boolean useExpiredDataIfLoaderNotAvailable, Long lifeTime, boolean isEncrypted) {
     return retrieveRecord.retrieveRecord(providerKey, dynamicKey, dynamicKeyGroup,
         useExpiredDataIfLoaderNotAvailable, lifeTime, isEncrypted);
   }

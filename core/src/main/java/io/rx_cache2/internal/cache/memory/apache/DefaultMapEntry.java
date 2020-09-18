@@ -21,8 +21,8 @@ import java.util.Map;
 
 
 /**
- * A restricted implementation of {@link java.util.Map.Entry Map.Entry} that prevents
- * the {@link java.util.Map.Entry Map.Entry} contract from being broken.
+ * A restricted implementation of {@link Map.Entry Map.Entry} that prevents
+ * the {@link Map.Entry Map.Entry} contract from being broken.
  *
  * @since 3.0
  * @version $Id: DefaultMapEntry.java 1533984 2013-10-20 21:12:51Z tn $

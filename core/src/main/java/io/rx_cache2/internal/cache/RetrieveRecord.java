@@ -18,10 +18,10 @@ package io.rx_cache2.internal.cache;
 
 import javax.inject.Inject;
 
-import io.rx_cache2.internal.Persistence;
-import io.rx_cache2.internal.Record;
 import io.rx_cache2.Source;
 import io.rx_cache2.internal.Memory;
+import io.rx_cache2.internal.Persistence;
+import io.rx_cache2.internal.Record;
 
 public final class RetrieveRecord extends Action {
   private final EvictRecord evictRecord;
@@ -29,7 +29,7 @@ public final class RetrieveRecord extends Action {
   private final String encryptKey;
 
   @Inject public RetrieveRecord(Memory memory, Persistence persistence, EvictRecord evictRecord,
-      HasRecordExpired hasRecordExpired, String encryptKey) {
+                                HasRecordExpired hasRecordExpired, String encryptKey) {
     super(memory, persistence);
     this.evictRecord = evictRecord;
     this.hasRecordExpired = hasRecordExpired;

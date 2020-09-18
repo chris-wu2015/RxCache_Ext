@@ -41,7 +41,6 @@ public final class SaveRecord extends Action {
       final Object data, final Long lifeTime, final boolean isExpirable,
       final boolean isEncrypted) {
     String composedKey = composeKey(providerKey, dynamicKey, dynamicKeyGroup);
-
     Record record = new Record(data, isExpirable, lifeTime);
     memory.put(composedKey, record);
 

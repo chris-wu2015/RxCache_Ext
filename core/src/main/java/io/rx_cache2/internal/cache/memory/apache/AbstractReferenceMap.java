@@ -74,7 +74,7 @@ import java.util.Set;
  * You can use {@link java.util.Collections#synchronizedMap} to
  * provide synchronized access to a <code>ReferenceMap</code>.
  *
- * @see java.lang.ref.Reference
+ * @see Reference
  * @since 3.1 (extracted from ReferenceMap in 3.0)
  * @version $Id: AbstractReferenceMap.java 1477799 2013-04-30 19:56:11Z tn $
  */
@@ -315,7 +315,7 @@ public abstract class AbstractReferenceMap<K, V> extends
      * @return a set view of this map's entries
      */
     @Override
-    public Set<Map.Entry<K, V>> entrySet() {
+    public Set<Entry<K, V>> entrySet() {
         if (entrySet == null) {
             entrySet = new ReferenceEntrySet<K, V>(this);
         }
@@ -478,7 +478,7 @@ public abstract class AbstractReferenceMap<K, V> extends
      * @return the entrySet iterator
      */
     @Override
-    protected Iterator<Map.Entry<K, V>> createEntrySetIterator() {
+    protected Iterator<Entry<K, V>> createEntrySetIterator() {
         return new ReferenceEntrySetIterator<K, V>(this);
     }
 
@@ -520,8 +520,8 @@ public abstract class AbstractReferenceMap<K, V> extends
         @Override
         public <T> T[] toArray(final T[] arr) {
             // special implementation to handle disappearing entries
-            final ArrayList<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>(size());
-            for (final Map.Entry<K, V> entry : this) {
+            final ArrayList<Entry<K, V>> list = new ArrayList<Entry<K, V>>(size());
+            for (final Entry<K, V> entry : this) {
                 list.add(new DefaultMapEntry<K, V>(entry));
             }
             return list.toArray(arr);
@@ -669,7 +669,7 @@ public abstract class AbstractReferenceMap<K, V> extends
                 return false;
             }
 
-            final Map.Entry<?, ?> entry = (Map.Entry<?, ?>)obj;
+            final Entry<?, ?> entry = (Entry<?, ?>)obj;
             final Object entryKey = entry.getKey();  // convert to hard reference
             final Object entryValue = entry.getValue();  // convert to hard reference
             if (entryKey == null || entryValue == null) {
@@ -850,13 +850,13 @@ public abstract class AbstractReferenceMap<K, V> extends
      * The EntrySet iterator.
      */
     static class ReferenceEntrySetIterator<K, V>
-            extends ReferenceBaseIterator<K, V> implements Iterator<Map.Entry<K, V>> {
+            extends ReferenceBaseIterator<K, V> implements Iterator<Entry<K, V>> {
 
         public ReferenceEntrySetIterator(final AbstractReferenceMap<K, V> parent) {
             super(parent);
         }
 
-        public Map.Entry<K, V> next() {
+        public Entry<K, V> next() {
             return nextEntry();
         }
 

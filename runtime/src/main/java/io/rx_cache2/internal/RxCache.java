@@ -16,11 +16,12 @@
 
 package io.rx_cache2.internal;
 
-import io.reactivex.Observable;
-import io.victoralbertos.jolyglot.JolyglotGenerics;
 import java.io.File;
 import java.lang.reflect.Proxy;
 import java.security.InvalidParameterException;
+
+import io.reactivex.Observable;
+import io.victoralbertos.jolyglot.JolyglotGenerics;
 
 public final class RxCache {
   private final Builder builder;

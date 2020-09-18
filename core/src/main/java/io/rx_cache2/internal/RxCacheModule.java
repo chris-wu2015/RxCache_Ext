@@ -16,6 +16,12 @@
 
 package io.rx_cache2.internal;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import io.rx_cache2.MigrationCache;
@@ -23,10 +29,6 @@ import io.rx_cache2.internal.cache.memory.ReferenceMapMemory;
 import io.rx_cache2.internal.encrypt.BuiltInEncryptor;
 import io.rx_cache2.internal.encrypt.Encryptor;
 import io.victoralbertos.jolyglot.JolyglotGenerics;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Singleton;
 
 @Module
 public final class RxCacheModule {
@@ -52,7 +54,8 @@ public final class RxCacheModule {
     return cacheDirectory;
   }
 
-  @Singleton @Provides Persistence providePersistence(io.rx_cache2.internal.Disk disk) {
+  @Singleton @Provides
+  Persistence providePersistence(io.rx_cache2.internal.Disk disk) {
     return disk;
   }
 
@@ -68,7 +71,8 @@ public final class RxCacheModule {
     return maxMgPersistenceCache != null ? maxMgPersistenceCache : 100;
   }
 
-  @Singleton @Provides Encryptor provideEncryptor() {
+  @Singleton @Provides
+  Encryptor provideEncryptor() {
     return new BuiltInEncryptor();
   }
 

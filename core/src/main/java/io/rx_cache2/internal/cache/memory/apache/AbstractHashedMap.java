@@ -317,7 +317,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
         }
         final int newSize = (int) ((size + mapSize) / loadFactor + 1);
         ensureCapacity(calculateNewCapacity(newSize));
-        for (final Map.Entry<? extends K, ? extends V> entry: map.entrySet()) {
+        for (final Entry<? extends K, ? extends V> entry: map.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
     }
@@ -802,7 +802,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      * @return the entrySet view
      */
     @Override
-    public Set<Map.Entry<K, V>> entrySet() {
+    public Set<Entry<K, V>> entrySet() {
         if (entrySet == null) {
             entrySet = new EntrySet<K, V>(this);
         }
@@ -815,9 +815,9 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      *
      * @return the entrySet iterator
      */
-    protected Iterator<Map.Entry<K, V>> createEntrySetIterator() {
+    protected Iterator<Entry<K, V>> createEntrySetIterator() {
         if (size() == 0) {
-            return io.rx_cache2.internal.cache.memory.apache.EmptyIterator.<Map.Entry<K, V>>emptyIterator();
+            return io.rx_cache2.internal.cache.memory.apache.EmptyIterator.<Entry<K, V>>emptyIterator();
         }
         return new EntrySetIterator<K, V>(this);
     }
@@ -825,7 +825,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
     /**
      * EntrySet implementation.
      */
-    protected static class EntrySet<K, V> extends AbstractSet<Map.Entry<K, V>> {
+    protected static class EntrySet<K, V> extends AbstractSet<Entry<K, V>> {
         /** The parent map */
         private final AbstractHashedMap<K, V> parent;
 
@@ -847,7 +847,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
         @Override
         public boolean contains(final Object entry) {
             if (entry instanceof Map.Entry) {
-                final Map.Entry<?, ?> e = (Map.Entry<?, ?>) entry;
+                final Entry<?, ?> e = (Entry<?, ?>) entry;
                 final Entry<K, V> match = parent.getEntry(e.getKey());
                 return match != null && match.equals(e);
             }
@@ -862,13 +862,13 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
             if (contains(obj) == false) {
                 return false;
             }
-            final Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
+            final Entry<?, ?> entry = (Entry<?, ?>) obj;
             parent.remove(entry.getKey());
             return true;
         }
 
         @Override
-        public Iterator<Map.Entry<K, V>> iterator() {
+        public Iterator<Entry<K, V>> iterator() {
             return parent.createEntrySetIterator();
         }
     }
@@ -876,13 +876,13 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
     /**
      * EntrySet iterator.
      */
-    protected static class EntrySetIterator<K, V> extends HashIterator<K, V> implements Iterator<Map.Entry<K, V>> {
+    protected static class EntrySetIterator<K, V> extends HashIterator<K, V> implements Iterator<Entry<K, V>> {
 
         protected EntrySetIterator(final AbstractHashedMap<K, V> parent) {
             super(parent);
         }
 
-        public Map.Entry<K, V> next() {
+        public Entry<K, V> next() {
             return super.nextEntry();
         }
     }
@@ -1057,7 +1057,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      * The <code>entryXxx()</code> methods on <code>AbstractHashedMap</code> exist
      * to provide the necessary access.
      */
-    protected static class HashEntry<K, V> implements Map.Entry<K, V>,
+    protected static class HashEntry<K, V> implements Entry<K, V>,
         io.rx_cache2.internal.cache.memory.apache.KeyValue<K, V> {
         /** The next entry in the hash chain */
         protected HashEntry<K, V> next;
@@ -1104,7 +1104,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
             if (obj instanceof Map.Entry == false) {
                 return false;
             }
-            final Map.Entry<?, ?> other = (Map.Entry<?, ?>) obj;
+            final Entry<?, ?> other = (Entry<?, ?>) obj;
             return
                     (getKey() == null ? other.getKey() == null : getKey().equals(other.getKey())) &&
                             (getValue() == null ? other.getValue() == null : getValue().equals(other.getValue()));
@@ -1345,7 +1345,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
     @Override
     public int hashCode() {
         int total = 0;
-        final Iterator<Map.Entry<K, V>> it = createEntrySetIterator();
+        final Iterator<Entry<K, V>> it = createEntrySetIterator();
         while (it.hasNext()) {
             total += it.next().hashCode();
         }

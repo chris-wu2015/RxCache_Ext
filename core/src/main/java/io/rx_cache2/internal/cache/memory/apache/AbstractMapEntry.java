@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * Abstract Pair class to assist with creating correct
- * {@link java.util.Map.Entry Map.Entry} implementations.
+ * {@link Map.Entry Map.Entry} implementations.
  *
  * @since 3.0
  * @version $Id: AbstractMapEntry.java 1477753 2013-04-30 18:24:24Z tn $
@@ -57,7 +57,7 @@ public abstract class AbstractMapEntry<K, V> extends AbstractKeyValue<K, V> impl
     /**
      * Compares this <code>Map.Entry</code> with another <code>Map.Entry</code>.
      * <p>
-     * Implemented per API documentation of {@link java.util.Map.Entry#equals(Object)}
+     * Implemented per API documentation of {@link Map.Entry#equals(Object)}
      *
      * @param obj  the object to compare to
      * @return true if equal key and value
@@ -79,7 +79,7 @@ public abstract class AbstractMapEntry<K, V> extends AbstractKeyValue<K, V> impl
     /**
      * Gets a hashCode compatible with the equals method.
      * <p>
-     * Implemented per API documentation of {@link java.util.Map.Entry#hashCode()}
+     * Implemented per API documentation of {@link Map.Entry#hashCode()}
      *
      * @return a suitable hash code
      */

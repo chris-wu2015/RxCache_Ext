@@ -20,86 +20,92 @@ import io.reactivex.Observable;
 import io.rx_cache2.internal.Locale;
 
 public final class ConfigProvider {
-  private final String providerKey;
-  private final Boolean useExpiredDataIfNotLoaderAvailable;
-  private final Long lifeTime;
-  private final boolean requiredDetailedResponse;
-  private final boolean expirable;
-  private final boolean encrypted;
-  private final String dynamicKey, dynamicKeyGroup;
-  private final Observable loaderObservable;
-  private final EvictProvider evictProvider;
+    private final String providerKey;
+    private final Boolean useExpiredDataIfNotLoaderAvailable;
+    private final Long lifeTime;
+    private final boolean requiredDetailedResponse;
+    private final boolean expirable;
+    private final boolean encrypted;
+    private final String dynamicKey, dynamicKeyGroup;
+    private final Observable loaderObservable;
+    private final EvictProvider evictProvider;
+    private final CacheMode cacheMode;
 
-  public ConfigProvider(String providerKey, Boolean useExpiredDataIfNotLoaderAvailable,
-      Long lifeTime, boolean requiredDetailedResponse,
-      boolean expirable, boolean encrypted, String dynamicKey, String dynamicKeyGroup,
-      Observable loaderObservable, EvictProvider evictProvider) {
-    this.providerKey = providerKey;
-    this.useExpiredDataIfNotLoaderAvailable = useExpiredDataIfNotLoaderAvailable;
-    this.lifeTime = lifeTime;
-    this.requiredDetailedResponse = requiredDetailedResponse;
-    this.expirable = expirable;
-    this.encrypted = encrypted;
-    this.dynamicKey = dynamicKey;
-    this.dynamicKeyGroup = dynamicKeyGroup;
-    this.loaderObservable = loaderObservable;
-    this.evictProvider = evictProvider;
-    checkIntegrity();
-  }
-
-  public String getProviderKey() {
-    return providerKey;
-  }
-
-  public String getDynamicKey() {
-    return dynamicKey;
-  }
-
-  public String getDynamicKeyGroup() {
-    return dynamicKeyGroup;
-  }
-
-  public Long getLifeTimeMillis() {
-    return lifeTime;
-  }
-
-  public boolean requiredDetailedResponse() {
-    return requiredDetailedResponse;
-  }
-
-  public Observable getLoaderObservable() {
-    return loaderObservable;
-  }
-
-  public EvictProvider evictProvider() {
-    return evictProvider;
-  }
-
-  public boolean isExpirable() {
-    return expirable;
-  }
-
-  public boolean isEncrypted() {
-    return encrypted;
-  }
-
-  public Boolean useExpiredDataIfNotLoaderAvailable() {
-    return useExpiredDataIfNotLoaderAvailable;
-  }
-
-  private void checkIntegrity() {
-    if (evictProvider() instanceof io.rx_cache2.EvictDynamicKeyGroup
-        && getDynamicKeyGroup().isEmpty()) {
-      String errorMessage = providerKey
-          + Locale.EVICT_DYNAMIC_KEY_GROUP_PROVIDED_BUT_NOT_PROVIDED_ANY_DYNAMIC_KEY_GROUP;
-      throw new IllegalArgumentException(errorMessage);
+    public ConfigProvider(String providerKey, Boolean useExpiredDataIfNotLoaderAvailable,
+                          Long lifeTime, boolean requiredDetailedResponse,
+                          boolean expirable, boolean encrypted, String dynamicKey, String dynamicKeyGroup,
+                          Observable loaderObservable, EvictProvider evictProvider, CacheMode cacheMode) {
+        this.providerKey = providerKey;
+        this.useExpiredDataIfNotLoaderAvailable = useExpiredDataIfNotLoaderAvailable;
+        this.lifeTime = lifeTime;
+        this.requiredDetailedResponse = requiredDetailedResponse;
+        this.expirable = expirable;
+        this.encrypted = encrypted;
+        this.dynamicKey = dynamicKey;
+        this.dynamicKeyGroup = dynamicKeyGroup;
+        this.loaderObservable = loaderObservable;
+        this.evictProvider = evictProvider;
+        this.cacheMode = cacheMode;
+        checkIntegrity();
     }
 
-    if (evictProvider() instanceof io.rx_cache2.EvictDynamicKey
-        && getDynamicKey().isEmpty()) {
-      String errorMessage =
-          providerKey + Locale.EVICT_DYNAMIC_KEY_PROVIDED_BUT_NOT_PROVIDED_ANY_DYNAMIC_KEY;
-      throw new IllegalArgumentException(errorMessage);
+    public CacheMode getCacheMode() {
+        return cacheMode;
     }
-  }
+
+    public String getProviderKey() {
+        return providerKey;
+    }
+
+    public String getDynamicKey() {
+        return dynamicKey;
+    }
+
+    public String getDynamicKeyGroup() {
+        return dynamicKeyGroup;
+    }
+
+    public Long getLifeTimeMillis() {
+        return lifeTime;
+    }
+
+    public boolean requiredDetailedResponse() {
+        return requiredDetailedResponse;
+    }
+
+    public Observable getLoaderObservable() {
+        return loaderObservable;
+    }
+
+    public EvictProvider evictProvider() {
+        return evictProvider;
+    }
+
+    public boolean isExpirable() {
+        return expirable;
+    }
+
+    public boolean isEncrypted() {
+        return encrypted;
+    }
+
+    public Boolean useExpiredDataIfNotLoaderAvailable() {
+        return useExpiredDataIfNotLoaderAvailable;
+    }
+
+    private void checkIntegrity() {
+        if (evictProvider() instanceof io.rx_cache2.EvictDynamicKeyGroup
+                && getDynamicKeyGroup().isEmpty()) {
+            String errorMessage = providerKey
+                    + Locale.EVICT_DYNAMIC_KEY_GROUP_PROVIDED_BUT_NOT_PROVIDED_ANY_DYNAMIC_KEY_GROUP;
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (evictProvider() instanceof io.rx_cache2.EvictDynamicKey
+                && getDynamicKey().isEmpty()) {
+            String errorMessage =
+                    providerKey + Locale.EVICT_DYNAMIC_KEY_PROVIDED_BUT_NOT_PROVIDED_ANY_DYNAMIC_KEY;
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 }
